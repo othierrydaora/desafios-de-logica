@@ -28,3 +28,20 @@ select * from tb_filme where ds_generos = 'Romance' or ds_generos = 'Horror';
 select * from tb_filme where nr_ano < 2000 and vl_avaliacao_imdb > 9 and nr_duracao > 150;
 select * from tb_filme where (ds_pais = 'Japan' and nm_filme like 'G%') or (ds_pais = 'China' and nm_filme like '%Kung Fu%');
 select * from tb_ator where nm_ator like 'B%' and nm_ator like '%A';
+
+-- Nivel 4
+select * from tb_filme_ator
+inner join tb_ator on tb_filme_ator.id_ator = tb_ator.id_ator
+where id_filme in (select id_filme from tb_filme where nm_filme like 'Pirates of the Caribbean%');
+select * from tb_filme_ator
+inner join tb_ator on tb_filme_ator.id_ator = tb_ator.id_ator
+inner join tb_filme on tb_filme_ator.id_filme = tb_filme.id_filme
+where nm_ator = 'Jackie Chan';
+
+
+-- Nivel 5
+select * from tb_filme where nr_ano between 2010 and 2017;
+select sum(nr_duracao) as duracao from tb_filme where ds_pais = 'India';
+select *, max(vl_avaliacao_imdb) from tb_filme;
+select *, min(vl_avaliacao_imdb) from tb_filme;
+select nr_ano, count(nr_ano) as quantidade from tb_filme group by nr_ano;
